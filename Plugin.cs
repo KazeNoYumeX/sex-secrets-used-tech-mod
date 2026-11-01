@@ -24,13 +24,13 @@ namespace SexSecretsUsedTechMod
     public class Menu : MonoBehaviour
     {
         private const string Gold = "Player_Gold";
-        private const string HP = "Player_HP";
+        private const string Hp = "Player_HP";
 
         private bool _show;
         private Rect _rect = new Rect(20, 20, 320, 180);
         private string _goldInput = "";
         private float _speed = 1f;
-        private bool _lockHP;
+        private bool _lockHp;
 
         // Invisible uGUI panel under the menu window, so clicks on the menu don't reach the game UI behind it
         private RectTransform _clickBlocker;
@@ -42,14 +42,14 @@ namespace SexSecretsUsedTechMod
         private void Update()
         {
             // Only force the scale while sped up, so the game's own timeScale changes still work at 1x
-            if (_speed != 1f)
+            if (!Mathf.Approximately(_speed, 1f))
             {
                 Time.timeScale = _speed;
             }
 
-            if (_lockHP && Loaded && SSOT_Player.GetVarInt(HP) < SSOT_Player.MaxHP())
+            if (_lockHp && Loaded && SSOT_Player.GetVarInt(Hp) < SSOT_Player.MaxHP())
             {
-                SetVar(HP, SSOT_Player.MaxHP());
+                SetVar(Hp, SSOT_Player.MaxHP());
             }
 
             UpdateClickBlocker();
@@ -126,7 +126,7 @@ namespace SexSecretsUsedTechMod
                 speed = 1f;
             }
 
-            if (speed != _speed)
+            if (!Mathf.Approximately(speed, _speed))
             {
                 _speed = speed;
                 Time.timeScale = speed;
@@ -149,13 +149,13 @@ namespace SexSecretsUsedTechMod
                 SetVar(Gold, SSOT_Player.GetVarInt(Gold) + 10000);
             }
 
-            GUI.Label(new Rect(10, 85, 160, 22), $"體力：{SSOT_Player.GetVarInt(HP)} / {SSOT_Player.MaxHP()}");
+            GUI.Label(new Rect(10, 85, 160, 22), $"體力：{SSOT_Player.GetVarInt(Hp)} / {SSOT_Player.MaxHP()}");
             if (GUI.Button(new Rect(180, 85, 60, 22), "補滿"))
             {
-                SetVar(HP, SSOT_Player.MaxHP());
+                SetVar(Hp, SSOT_Player.MaxHP());
             }
 
-            _lockHP = GUI.Toggle(new Rect(250, 85, 60, 22), _lockHP, "鎖定");
+            _lockHp = GUI.Toggle(new Rect(250, 85, 60, 22), _lockHp, "鎖定");
         }
 
         private static void SetVar(string key, int value)
