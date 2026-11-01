@@ -4,6 +4,7 @@ using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SexSecretsUsedTechMod
 {
@@ -31,6 +32,9 @@ namespace SexSecretsUsedTechMod
         private float _speed = 1f;
         private bool _lockHP;
 
+        // Invisible uGUI panel under the menu window, so clicks on the menu don't reach the game UI behind it
+        private RectTransform _clickBlocker;
+
         // Il2CppInterop creates injected components through this constructor
         public Menu(IntPtr ptr)
             : base(ptr) { }
@@ -47,6 +51,37 @@ namespace SexSecretsUsedTechMod
             {
                 SetVar(HP, SSOT_Player.MaxHP());
             }
+
+            UpdateClickBlocker();
+        }
+
+        private void UpdateClickBlocker()
+        {
+            bool block = _show;
+            if (_clickBlocker == null)
+            {
+                if (!block)
+                {
+                    return;
+                }
+
+                GameObject canvas = new GameObject("SexSecretsUsedTechMod.ClickBlocker");
+                DontDestroyOnLoad(canvas);
+                Canvas c = canvas.AddComponent<Canvas>();
+                c.renderMode = RenderMode.ScreenSpaceOverlay;
+                c.sortingOrder = short.MaxValue;
+                canvas.AddComponent<GraphicRaycaster>();
+                GameObject panel = new GameObject("Panel");
+                panel.transform.SetParent(canvas.transform, false);
+                panel.AddComponent<Image>().color = Color.clear;
+                _clickBlocker = panel.GetComponent<RectTransform>();
+                // IMGUI measures from the top left in screen pixels
+                _clickBlocker.anchorMin = _clickBlocker.anchorMax = _clickBlocker.pivot = new Vector2(0, 1);
+            }
+
+            _clickBlocker.gameObject.SetActive(block);
+            _clickBlocker.anchoredPosition = new Vector2(_rect.x, -_rect.y);
+            _clickBlocker.sizeDelta = _rect.size;
         }
 
         private void OnGUI()
