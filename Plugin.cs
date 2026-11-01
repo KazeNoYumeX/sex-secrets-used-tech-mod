@@ -29,6 +29,7 @@ namespace SexSecretsUsedTechMod
         private string _goldInput = "";
         private float _speed = 1f;
         private bool _lockHp;
+        private int _maxHp;
 
         // Invisible uGUI panel under the menu window, so clicks on the menu don't reach the game UI behind it
         private RectTransform _clickBlocker;
@@ -45,9 +46,11 @@ namespace SexSecretsUsedTechMod
                 Time.timeScale = _speed;
             }
 
-            if (_lockHp && Loaded && SSOT_Player.GetVarInt(Hp) < SSOT_Player.MaxHP())
+            // MaxHP() walks the whole item table, so work it out once a frame rather than in every OnGUI event
+            _maxHp = Loaded ? SSOT_Player.MaxHP() : 0;
+            if (_lockHp && Loaded && SSOT_Player.GetVarInt(Hp) < _maxHp)
             {
-                SetVar(Hp, SSOT_Player.MaxHP());
+                SetVar(Hp, _maxHp);
             }
 
             UpdateClickBlocker();
@@ -147,10 +150,10 @@ namespace SexSecretsUsedTechMod
                 SetVar(Gold, SSOT_Player.GetVarInt(Gold) + 10000);
             }
 
-            GUI.Label(new Rect(10, 85, 160, 22), $"體力：{SSOT_Player.GetVarInt(Hp)} / {SSOT_Player.MaxHP()}");
+            GUI.Label(new Rect(10, 85, 160, 22), $"體力：{SSOT_Player.GetVarInt(Hp)} / {_maxHp}");
             if (GUI.Button(new Rect(180, 85, 60, 22), "補滿"))
             {
-                SetVar(Hp, SSOT_Player.MaxHP());
+                SetVar(Hp, _maxHp);
             }
 
             _lockHp = GUI.Toggle(new Rect(250, 85, 60, 22), _lockHp, "鎖定");
