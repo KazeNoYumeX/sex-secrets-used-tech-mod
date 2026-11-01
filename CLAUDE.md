@@ -18,5 +18,6 @@ A BepInEx 6 plugin (HarmonyX-based mod) for the Unity game **Sex, Secrets & Used
 - BepInEx `6.0.0-be.791` IL2CPP win-x64 is installed in the game folder (legend-of-mortal-mod's be.697 is the Mono build and predates Unity 6 support).
 - The developer shipped `ElectronicsThriftStore_BackUpThisFolder_ButDontShipItWithYourGame\Managed`: the real Mono assemblies with method bodies. Decompile `Managed\Assembly-CSharp.dll` there to read game logic, but compile against `BepInEx\interop` (stubs), never those DLLs.
 - IL2CPP: injected `MonoBehaviour`s need the `(IntPtr)` constructor; `BasePlugin.AddComponent<T>` registers them. IL2CPP collections are `Il2CppSystem.Collections.Generic.*`, not `System.*`.
+- IL2CPP stripped the `LayoutedWindow` constructor that `GUILayout.Window` needs (`MissingMethodException` every frame), so the menu draws with `GUI.Window` and fixed `Rect`s.
 - The game ships the Input System, so the menu reads its key from IMGUI events (`Event.current`) rather than `UnityEngine.Input`.
 - Never start the exe directly — launch through Steam (see legend-of-mortal-mod's CLAUDE.md for the `DOORSTOP_INITIALIZED` trap).

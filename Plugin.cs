@@ -40,7 +40,8 @@ namespace SexSecretsUsedTechMod
 
             if (_show)
             {
-                _rect = GUILayout.Window(
+                // GUI.Window, not GUILayout.Window: IL2CPP stripped the LayoutedWindow constructor the latter needs
+                _rect = GUI.Window(
                     0x4D4F44,
                     _rect,
                     (GUI.WindowFunction)DrawWindow,
@@ -51,7 +52,7 @@ namespace SexSecretsUsedTechMod
 
         private void DrawWindow(int id)
         {
-            GUILayout.Label("尚無功能");
+            GUI.Label(new Rect(10, 25, 300, 22), "尚無功能");
             GUI.DragWindow();
         }
     }
