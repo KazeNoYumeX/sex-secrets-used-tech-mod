@@ -13,9 +13,10 @@ An in-game cheat menu for **Sex, Secrets & Used Tech (修幹嘛？二手3C店的
 > This mod only works with **BepInEx 6 for IL2CPP** (`6.0.0-be.791` recommended). It does not load on BepInEx 5 or on the Mono build of BepInEx 6.
 > To check: `BepInEx/core` must contain `BepInEx.Unity.IL2CPP.dll`.
 
-- Download [BepInEx 6 be.791 (Unity IL2CPP x64)](https://builds.bepinex.dev/projects/bepinex_be/791/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.791%2Bb782da4.zip) and extract it into the game folder (`steamapps/common/ElectronicStore`, the one with `ElectronicsThriftStore.exe`)
-- Start the game once through Steam. On the first start BepInEx generates `BepInEx/interop` and the screen stays black for a while; close the game once it shows up
-- Put `SexSecretsUsedTechMod.dll` in `BepInEx/plugins/SexSecretsUsedTechMod/`
+- Download `sex-secrets-used-tech-mod.zip` from [Releases](https://github.com/KazeNoYumeX/sex-secrets-used-tech-mod/releases/latest); it includes BepInEx 6 be.791 (IL2CPP)
+- Extract it into the game folder (`steamapps/common/ElectronicStore`, the one with `ElectronicsThriftStore.exe`), overwriting existing files
+- Start the game through Steam. On the first start BepInEx generates `BepInEx/interop` and the screen stays black for a while; after that it starts normally
+- To install BepInEx yourself, extract [BepInEx 6 be.791 (Unity IL2CPP x64)](https://builds.bepinex.dev/projects/bepinex_be/791/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.791%2Bb782da4.zip) into the game folder and put `SexSecretsUsedTechMod.dll` in `BepInEx/plugins/SexSecretsUsedTechMod/`
 
 ## Troubleshooting
 
@@ -34,6 +35,8 @@ Press `F3` in game to open or close the menu. The key is `MenuToggleKey` in `Bep
 
 - Money and stamina can only be changed once a save is loaded; on the title screen the menu says 請先載入存檔 (load a save first)
 - While the menu is open, clicks on it don't reach the game behind it
+
+See [CHANGELOG.md](CHANGELOG.md) for the changes in each version.
 
 ## Screenshots
 

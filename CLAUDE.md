@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A BepInEx 6 plugin for the Unity game **Sex, Secrets & Used Tech** (**修幹嘛？二手3C店的闇營業**, install folder `ElectronicStore`, exe `ElectronicsThriftStore.exe`, Steam app 3576350, Unity 6000.0.49, **IL2CPP**, built on Naninovel). It adds an in-game IMGUI cheat/debug menu toggled with `F3` (BepInEx config key `General.MenuToggleKey`). UI strings are Traditional Chinese. Sibling of `C:\Projects\legend-of-mortal-mod` (活俠傳, Mono), whose layout and conventions it follows (explicit types over `var`, `Traverse` for private members, CSharpier, Keep a Changelog once there is a release).
+A BepInEx 6 plugin for the Unity game **Sex, Secrets & Used Tech** (**修幹嘛？二手3C店的闇營業**, install folder `ElectronicStore`, exe `ElectronicsThriftStore.exe`, Steam app 3576350, Unity 6000.0.49, **IL2CPP**, built on Naninovel). It adds an in-game IMGUI cheat/debug menu toggled with `F3` (BepInEx config key `General.MenuToggleKey`). UI strings are Traditional Chinese. Sibling of `C:\Projects\legend-of-mortal-mod` (活俠傳, Mono), whose layout and conventions it follows (explicit types over `var`, `Traverse` for private members, CSharpier, Keep a Changelog).
 
 ## Build
 
@@ -25,3 +25,8 @@ A BepInEx 6 plugin for the Unity game **Sex, Secrets & Used Tech** (**修幹嘛�
 ## Architecture
 
 - `Plugin.cs` — `Plugin` (`BasePlugin`) binds config and adds the injected `Menu` component, which draws the IMGUI window: 金錢 and 體力 (the `SSOT_Player` vars `Player_Gold` / `Player_HP`, set through `SSOT_Player.SetVar` and then `Singleton<UIRoot>.Instance.RefreshStateUI()` as the shop does; 鎖定 refills 體力 every frame) and 遊戲速度 (`Time.timeScale`, forced in `Update` while above 1x). `Player_MaxHP` only exists once a save is loaded and `SSOT_Player.MaxHP()` throws before that, so the stats are hidden until then. An invisible uGUI panel (`Canvas` at the top sorting order) follows the window while it is open, so clicks on the menu don't reach the game UI behind it.
+
+## Release
+
+- `CHANGELOG.md` follows Keep a Changelog: add each user-facing change under `[Unreleased]` in Traditional Chinese under the English `Added` / `Changed` / `Removed` / `Fixed` headings. A release bumps `<Version>` in the csproj and the `BepInPlugin` attribute, turns `[Unreleased]` into `[x.y.z] - YYYY-MM-DD` and adds its compare link.
+- The release asset `sex-secrets-used-tech-mod.zip` is the BepInEx 6 be.791 IL2CPP win-x64 zip plus `BepInEx/plugins/SexSecretsUsedTechMod/SexSecretsUsedTechMod.dll`. Release notes are bilingual (Chinese sections, `---`, `## English`), like legend-of-mortal-mod's.

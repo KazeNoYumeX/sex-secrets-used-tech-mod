@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace SexSecretsUsedTechMod
 {
-    [BepInPlugin("SexSecretsUsedTechMod", "修幹嘛？二手3C店的闇營業 修改選單", "0.1.0")]
+    [BepInPlugin("SexSecretsUsedTechMod", "修幹嘛？二手3C店的闇營業 修改選單", "1.0.0")]
     public class Plugin : BasePlugin
     {
         internal static ConfigEntry<KeyCode> MenuToggleKey;

@@ -10,9 +10,10 @@
 > 本 Mod 只支援 **BepInEx 6 IL2CPP 版**（建議 `6.0.0-be.791`），不支援 BepInEx 5，也不支援 BepInEx 6 的 Mono 版。
 > 判斷方式：`BepInEx/core` 裡有 `BepInEx.Unity.IL2CPP.dll` 才是對的版本。
 
-- 下載 [BepInEx 6 be.791（Unity IL2CPP x64）](https://builds.bepinex.dev/projects/bepinex_be/791/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.791%2Bb782da4.zip)，解壓縮到遊戲目錄（`steamapps/common/ElectronicStore`，裡面有 `ElectronicsThriftStore.exe`）
-- 從 Steam 啟動遊戲一次。第一次啟動時 BepInEx 要產生 `BepInEx/interop`，會停在黑畫面一段時間，等遊戲出現後再關閉
-- 把 `SexSecretsUsedTechMod.dll` 放到 `BepInEx/plugins/SexSecretsUsedTechMod/`
+- 從 [Releases](https://github.com/KazeNoYumeX/sex-secrets-used-tech-mod/releases/latest) 下載 `sex-secrets-used-tech-mod.zip`，內含 BepInEx 6 be.791（IL2CPP 版）
+- 解壓縮到遊戲目錄（`steamapps/common/ElectronicStore`，裡面有 `ElectronicsThriftStore.exe`），遇到同名檔案請選擇覆蓋
+- 從 Steam 啟動遊戲。第一次啟動時 BepInEx 要產生 `BepInEx/interop`，會停在黑畫面一段時間，之後就正常
+- 自行安裝 BepInEx 的話，請下載 [BepInEx 6 be.791（Unity IL2CPP x64）](https://builds.bepinex.dev/projects/bepinex_be/791/BepInEx-Unity.IL2CPP-win-x64-6.0.0-be.791%2Bb782da4.zip) 解壓縮到遊戲目錄，再把 `SexSecretsUsedTechMod.dll` 放到 `BepInEx/plugins/SexSecretsUsedTechMod/`
 
 ## 疑難排解 Troubleshooting
 
@@ -31,6 +32,8 @@
 
 - 金錢和體力要載入存檔後才能改，在標題畫面只會顯示「請先載入存檔」
 - 選單打開時，點選單不會點到後面的遊戲
+
+各版本的變更見 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 使用效果 Screenshots
 
