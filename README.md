@@ -16,7 +16,7 @@
 
 ## 疑難排解 Troubleshooting
 
-- 按 `F3` 沒反應：打開 `BepInEx/LogOutput.log`，確認有 `Loading [Sex, Secrets & Used Tech 修改選單 …]`
+- 按 `F3` 沒反應：打開 `BepInEx/LogOutput.log`，確認有 `Loading [修幹嘛？二手3C店的闇營業 修改選單 …]`
 - `BepInEx/LogOutput.log` 沒有更新：完全結束 Steam 後重新開啟，再從 Steam 啟動遊戲。不要直接執行 `ElectronicsThriftStore.exe`
 
 ## 使用方法 Usage

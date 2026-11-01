@@ -19,7 +19,7 @@ An in-game cheat menu for **Sex, Secrets & Used Tech (修幹嘛？二手3C店的
 
 ## Troubleshooting
 
-- `F3` does nothing: open `BepInEx/LogOutput.log` and check that it lists `Loading [Sex, Secrets & Used Tech 修改選單 …]`
+- `F3` does nothing: open `BepInEx/LogOutput.log` and check that it lists `Loading [修幹嘛？二手3C店的闇營業 修改選單 …]`
 - `BepInEx/LogOutput.log` is not updated: fully exit Steam, reopen it and start the game through Steam. Don't run `ElectronicsThriftStore.exe` directly
 
 ## Usage
