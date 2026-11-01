@@ -43,9 +43,9 @@ namespace SexSecretsUsedTechMod
                 Time.timeScale = _speed;
             }
 
-            // MaxHP() walks the whole item table, so work it out once a frame rather than in every OnGUI event
-            _maxHp = Loaded ? SSOT_Player.MaxHP() : 0;
-            if (_lockHp && Loaded && SSOT_Player.GetVarInt(Hp) < _maxHp)
+            // MaxHP() walks the whole item table, so work it out once a frame, and only when something shows or uses it
+            _maxHp = (_show || _lockHp) && Loaded ? SSOT_Player.MaxHP() : 0;
+            if (_lockHp && SSOT_Player.GetVarInt(Hp) < _maxHp)
             {
                 SetVar(Hp, _maxHp);
             }
@@ -103,7 +103,8 @@ namespace SexSecretsUsedTechMod
 
         private void DrawWindow(int id)
         {
-            if (Loaded)
+            // 0 until Update has run with the menu open (and before a save loads), so 補滿 can never set 0
+            if (_maxHp > 0)
             {
                 DrawStats();
             }
