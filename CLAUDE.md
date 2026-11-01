@@ -21,3 +21,7 @@ A BepInEx 6 plugin (HarmonyX-based mod) for the Unity game **Sex, Secrets & Used
 - IL2CPP stripped the `LayoutedWindow` constructor that `GUILayout.Window` needs (`MissingMethodException` every frame), so the menu draws with `GUI.Window` and fixed `Rect`s.
 - The game ships the Input System, so the menu reads its key from IMGUI events (`Event.current`) rather than `UnityEngine.Input`.
 - Never start the exe directly — launch through Steam (see legend-of-mortal-mod's CLAUDE.md for the `DOORSTOP_INITIALIZED` trap).
+
+## Architecture
+
+- `Plugin.cs` — `Plugin` (`BasePlugin`) binds config and adds the injected `Menu` component, which draws the IMGUI window: 金錢 and 體力 (the `SSOT_Player` vars `Player_Gold` / `Player_HP`, set through `SSOT_Player.SetVar` and then `Singleton<UIRoot>.Instance.RefreshStateUI()` as the shop does; 鎖定 refills 體力 every frame) and 遊戲速度 (`Time.timeScale`, forced in `Update` while above 1x). `Player_MaxHP` only exists once a save is loaded and `SSOT_Player.MaxHP()` throws before that, so the stats are hidden until then.
