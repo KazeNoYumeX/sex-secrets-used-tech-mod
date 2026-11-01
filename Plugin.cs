@@ -19,13 +19,14 @@ namespace SexSecretsUsedTechMod
         }
     }
 
-    public class Menu : MonoBehaviour
+    // Il2CppInterop creates injected components through the (IntPtr) constructor
+    public class Menu(IntPtr ptr) : MonoBehaviour(ptr)
     {
         private const string Gold = "Player_Gold";
         private const string Hp = "Player_HP";
 
         private bool _show;
-        private Rect _rect = new Rect(20, 20, 320, 180);
+        private Rect _rect = new(20, 20, 320, 180);
         private string _goldInput = "";
         private float _speed = 1f;
         private bool _lockHp;
@@ -33,10 +34,6 @@ namespace SexSecretsUsedTechMod
 
         // Invisible uGUI panel under the menu window, so clicks on the menu don't reach the game UI behind it
         private RectTransform _clickBlocker;
-
-        // Il2CppInterop creates injected components through this constructor
-        public Menu(IntPtr ptr)
-            : base(ptr) { }
 
         private void Update()
         {
@@ -56,31 +53,26 @@ namespace SexSecretsUsedTechMod
             UpdateClickBlocker();
         }
 
+        private void Start()
+        {
+            GameObject canvas = new("SexSecretsUsedTechMod.ClickBlocker");
+            DontDestroyOnLoad(canvas);
+            Canvas c = canvas.AddComponent<Canvas>();
+            c.renderMode = RenderMode.ScreenSpaceOverlay;
+            c.sortingOrder = short.MaxValue;
+            canvas.AddComponent<GraphicRaycaster>();
+            GameObject panel = new("Panel");
+            panel.transform.SetParent(canvas.transform, false);
+            _clickBlocker = panel.AddComponent<RectTransform>();
+            panel.AddComponent<Image>().color = Color.clear;
+            // IMGUI measures from the top left in screen pixels
+            _clickBlocker.anchorMin = _clickBlocker.anchorMax = _clickBlocker.pivot = new Vector2(0, 1);
+            panel.SetActive(false);
+        }
+
         private void UpdateClickBlocker()
         {
-            bool block = _show;
-            if (_clickBlocker == null)
-            {
-                if (!block)
-                {
-                    return;
-                }
-
-                GameObject canvas = new GameObject("SexSecretsUsedTechMod.ClickBlocker");
-                DontDestroyOnLoad(canvas);
-                Canvas c = canvas.AddComponent<Canvas>();
-                c.renderMode = RenderMode.ScreenSpaceOverlay;
-                c.sortingOrder = short.MaxValue;
-                canvas.AddComponent<GraphicRaycaster>();
-                GameObject panel = new GameObject("Panel");
-                panel.transform.SetParent(canvas.transform, false);
-                panel.AddComponent<Image>().color = Color.clear;
-                _clickBlocker = panel.GetComponent<RectTransform>();
-                // IMGUI measures from the top left in screen pixels
-                _clickBlocker.anchorMin = _clickBlocker.anchorMax = _clickBlocker.pivot = new Vector2(0, 1);
-            }
-
-            _clickBlocker.gameObject.SetActive(block);
+            _clickBlocker.gameObject.SetActive(_show);
             _clickBlocker.anchoredPosition = new Vector2(_rect.x, -_rect.y);
             _clickBlocker.sizeDelta = _rect.size;
         }
