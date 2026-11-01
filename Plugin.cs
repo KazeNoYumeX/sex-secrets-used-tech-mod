@@ -2,7 +2,6 @@ using System;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
-using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +15,6 @@ namespace SexSecretsUsedTechMod
         public override void Load()
         {
             MenuToggleKey = Config.Bind("General", "MenuToggleKey", KeyCode.F3, "開關修改選單的按鍵");
-            Harmony.CreateAndPatchAll(typeof(Plugin).Assembly);
             AddComponent<Menu>();
         }
     }

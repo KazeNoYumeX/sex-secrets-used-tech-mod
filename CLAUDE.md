@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A BepInEx 6 plugin (HarmonyX-based mod) for the Unity game **Sex, Secrets & Used Tech** (**修幹嘛？二手3C店的闇營業**, install folder `ElectronicStore`, exe `ElectronicsThriftStore.exe`, Steam app 3576350, Unity 6000.0.49, **IL2CPP**, built on Naninovel). It adds an in-game IMGUI cheat/debug menu toggled with `F3` (BepInEx config key `General.MenuToggleKey`). UI strings are Traditional Chinese. Sibling of `C:\Projects\legend-of-mortal-mod` (活俠傳, Mono), whose layout and conventions it follows (explicit types over `var`, `Traverse` for private members, CSharpier, Keep a Changelog once there is a release).
+A BepInEx 6 plugin for the Unity game **Sex, Secrets & Used Tech** (**修幹嘛？二手3C店的闇營業**, install folder `ElectronicStore`, exe `ElectronicsThriftStore.exe`, Steam app 3576350, Unity 6000.0.49, **IL2CPP**, built on Naninovel). It adds an in-game IMGUI cheat/debug menu toggled with `F3` (BepInEx config key `General.MenuToggleKey`). UI strings are Traditional Chinese. Sibling of `C:\Projects\legend-of-mortal-mod` (活俠傳, Mono), whose layout and conventions it follows (explicit types over `var`, `Traverse` for private members, CSharpier, Keep a Changelog once there is a release).
 
 ## Build
 
